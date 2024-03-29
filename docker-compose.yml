@@ -1,0 +1,31 @@
+version: '3'
+services:
+  pruebas:
+    image: mongo:3.6.1
+    container_name: pruebas
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - '27017:27017'
+    command: mongod
+
+  service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: service
+    expose:
+      - 587
+    ports:
+      - "35000:4567"
+    networks:
+      - default
+
+
+networks:
+  default:
+
+volumes:
+  mongodb:
+  mongodb_config:

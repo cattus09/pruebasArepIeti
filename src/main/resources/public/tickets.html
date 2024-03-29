@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="styleTicket.css"> 
+</head>
+<body>
+    <h1>Tickets</h1>
+    <div id="ticketsTable"></div>
+
+    <script src="scriptTicket.js"></script>
+    <script>
+        function cambiarEstado(id, nuevoEstado) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Si la solicitud fue exitosa, actualizar la vista de los tickets
+                    mostrarTickets();
+                }
+            };
+            xhttp.open("GET", `/cambiarEstado?id=${id}&estado=${nuevoEstado}`, true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
